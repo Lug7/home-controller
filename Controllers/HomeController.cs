@@ -3,6 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using ExemploAspNetMvc.Models;
 
 namespace ExemploAspNetMvc.Controllers;
+// UerDto, UserCreateDto, UserForm
+public class UserRequest
+{
+    public string Nome { get; set; }    
+    public string Email { get; set; }       
+        
+}
 
 public class HomeController : Controller
 {
@@ -32,6 +39,15 @@ public class HomeController : Controller
         return $"Chegou aqui {q} para {nome}";
     }
 
+    public string TesteFormData([FromForm] UserRequest userRequest, [FromHeader]string valor)
+    {
+        return $"nome: {userRequest.Nome}, Email: {userRequest.Email}, valor: {valor}";
+    }
+
+    public IActionResult Formulario()
+    {
+        return View();
+    }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
